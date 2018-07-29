@@ -12,6 +12,8 @@ export default class Plot extends React.Component {
   constructor(props) {
     super(props);
     this.level = NEUTRAL;
+    this.node = React.createRef();
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -28,12 +30,23 @@ export default class Plot extends React.Component {
         this.level = STILL_DEAD;
       }
     }
+
+    if (nextProps.interactive && !this.props.interactive) {
+      this.node.current.addEventListener('click', this.handleClick);
+    } else if (this.props.interactive && !nextProps.interactive) {
+      this.node.current.removeEventListener('click', this.handleClick);
+    }
+  }
+
+  handleClick() {
+    this.props.onClick(this.props.plotIdx);
   }
 
   render() {
 
     return (
       <div
+        ref={this.node}
         className={'plot'}
         style={generatePlotStyle(this.level)}
       />

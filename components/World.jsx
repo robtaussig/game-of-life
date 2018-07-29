@@ -10,7 +10,7 @@ export default class World extends React.Component {
   }
 
   render() {
-    const { world} = this.props;
+    const { world, interactive, onClickCell } = this.props;
 
     return (
       <div
@@ -21,6 +21,9 @@ export default class World extends React.Component {
             <Plot
               key={`${plotIdx}-plot`}
               self={plot}
+              interactive={interactive}
+              plotIdx={plotIdx}
+              onClick={onClickCell}
             />
           );
         })}

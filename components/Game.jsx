@@ -7,7 +7,7 @@ export default class Game extends React.Component {
   }
 
   render() {
-    const { world, height, width } = this.props;
+    const { world, height, width, interactive, onClickCell } = this.props;
     return (
       <div style={{
         flex: '1',
@@ -16,6 +16,8 @@ export default class Game extends React.Component {
           world={world}
           height={height}
           width={width}
+          interactive={interactive}
+          onClickCell={onClickCell}
         />
       </div>
     );
